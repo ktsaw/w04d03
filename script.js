@@ -6,84 +6,95 @@ let quotes = [
   `I don't have friends. I have family.`,
   `It don't matter if you win by an inch or a mile. Winning's winning.`
 ];
-
 document.addEventListener("DOMContentLoaded", function(event) {
   // Random quote of the day generator
   const randomQuote = function() {
     document.querySelector('#quote-of-the-day').textContent = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
   };
   randomQuote();
-  
+
   // Do all of your work inside the document.addEventListener  
 
   // Part 1
-  document.querySelector('#main-title').textContent = 'Welcome to DOM Toretto Homepage'
-
+  function shortenPgTitle() { 
+  document.querySelector('#main-title').textContent = 'Welcome to DOM Toretto Homepage';
+}
+  shortenPgTitle();
 
   // Part 2
-  document.querySelector('body').style.backgroundColor = 'red'
-  
+  function changeBodyBgColor() {
+  document.querySelector('body').style.backgroundColor = 'goldenrod';
+}
+  changeBodyBgColor();
+
   // Part 3
-  //function removeLastFavoriteThing() {
-    
+  function removeLastFavoriteThing() {
   const favoriteThings = document.querySelectorAll('#favorite-things > li')
   document.querySelector('#favorite-things').removeChild(favoriteThings[favoriteThings.length -1])
-  //}
+  }
+  removeLastFavoriteThing();
 
   //Part 4
-
+  function makeSpecialTitleBigger() { 
   document.querySelectorAll('.special-title').forEach((item) => {
     item.style.fontSize = '2rem'
   })
-  
-  // Part 5
+ }
+ makeSpecialTitleBigger();
 
+  // Part 5
+  function removeChicagoRace() { 
   document.querySelectorAll('#past-races > li').forEach((item) => {
-    if(item.textContent.trim() === 'Chicago') {
-      document.querySelector('#past-races').removeChild(item)
+    if(item.textContent === 'Chicago') {
+      document.getElementById('past-races').removeChild(item)
     }
   })
-
+}
+  removeChicagoRace();
 
   // Part 6
 
-  let newLi = (document.createElement('li').innerText = 'Bangkok');
+  function addPastRace(city) {   
+  let newLi = (document.createElement('li').innerText = city);
   document.getElementById('past-races').append(newLi);
-
-  // const newLi = document.createElement('li')
-  // newLi.innerText = 'Bangkok'
-  // document.querySelector('#past-races').appendChild('li')
+ }
+ addPastRace('Bangkok')
 
 
   // Part 7
+  function createNewBlogPost() { 
+  const newDiv = document.createElement('div')
+  newDiv.className = ('blog-post purple')
+  const newH2 = document.createElement('h1')
+  newH2.textContent = 'Bangkok'
+  const newP = document.createElement('p')
+  newP.textContent = 'I COMPETED IN 2022 TOYO RACING CAR THAILAND!'
 
-  const blogPost = document.createElement('div')
-  blogPost.classList.add('blog-post')
-  const heading = document.createElement('h2')
-  heading.textContent = 'Bangkok'
-  const pEl = document.createElement('p')
-  pEl.textContent = 'I COMPETED IN 2022 TOYO RACING CAR THAILAND!'
-
-  document.querySelector('.main').appendChild(blogPost)
-  blogPost.appendChild(heading)
-  blogPost.appendChild(pEl)
+  document.querySelector('.main').appendChild(newDiv)
+  newDiv.appendChild(newH2)
+  newDiv.appendChild(newP)
+}
+  createNewBlogPost()
 
   // Part 8
   
-  document.querySelector('#quote-title').addEventListener('click' , (evt) => {
-  randonQuote()
+  document.getElementById('quote-title').addEventListener('click', (e) => { 
+  randomQuote()
+   })
+   
 
-})
   // Part 9
 
-document.querySelectAll ('.blog-post').forEach((item) => {
-  item.addEventListener('mouseOut', (evt) => {
-    evt.currentTarget.classList.toggle('purple')
+   document.querySelectorAll('.blog-post').forEach((item) => {
+   item.addEventListener('mouseover', (e) => {
+     e.target.classList.toggle = ('red')
+   })
+   item.addEventListener('mouseout', (e) => {
+    e.stopPropagation()
+    e.target.classList.toggle = ('purple')
+   })
+   
   })
-  item.addEventListener('mouseEnter', (evt) => {
-    evt.stopPropagation()
-    evt.currentTarget.classList.toggle('red')
-  })
-})
+  
 
-});
+  })
